@@ -1,0 +1,10 @@
+{
+    "name": "fadlly/day07-composer-autoloading",
+    "description": "Latihan Composer dan PSR-4 Autoloading",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {}
+}
