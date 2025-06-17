@@ -13,9 +13,17 @@ class FormController extends Controller
 
     public function handleForm(Request $request)
     {
-        $nama = $request->input('nama');
-        $nilai = $request->input('nilai');
 
-        return view('form-hasil', compact('nama', 'nilai'));
+        $validated = $request->validate([
+            'nama' => 'required|min:3',
+            'email' => 'required|email',
+            'nilai' => 'required|numeric|between:0,100',
+        ]);
+
+        $nama = $validated['nama'];
+        $email = $validated['email'];
+        $nilai = $validated['nilai'];
+
+        return view('form-hasil', compact('nama', 'email', 'nilai'));
     }
 }
