@@ -19,3 +19,5 @@ Route::get('/about', [PageController::class, 'about']);
 
 Route::get('/form', [FormController::class, 'showForm']);
 Route::post('/form', [FormController::class, 'handleForm']);
+
+Route::get('/mahasiswa', [FormController::class, 'listMahasiswa']);

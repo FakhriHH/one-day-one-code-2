@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Mahasiswa;
 
 class FormController extends Controller
 {
@@ -13,17 +14,21 @@ class FormController extends Controller
 
     public function handleForm(Request $request)
     {
-
         $validated = $request->validate([
             'nama' => 'required|min:3',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:mahasiswa,email',
             'nilai' => 'required|numeric|between:0,100',
         ]);
 
-        $nama = $validated['nama'];
-        $email = $validated['email'];
-        $nilai = $validated['nilai'];
+        // Simpan ke database
+        $mhs = Mahasiswa::create($validated);
 
-        return view('form-hasil', compact('nama', 'email', 'nilai'));
+        return redirect('/mahasiswa')->with('success', 'Mahasiswa berhasil ditambahkan!');
+    }
+
+    public function listMahasiswa()
+    {
+        $data = Mahasiswa::all();
+        return view('mahasiswa-index', compact('data'));
     }
 }
