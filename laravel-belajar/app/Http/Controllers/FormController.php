@@ -23,12 +23,12 @@ class FormController extends Controller
         // Simpan ke database
         $mhs = Mahasiswa::create($validated);
 
-        return redirect('/mahasiswa')->with('success', 'Mahasiswa berhasil ditambahkan!');
+        return redirect('/list-form')->with('success', 'Mahasiswa berhasil ditambahkan!');
     }
 
-    public function listMahasiswa()
+    public function listForm()
     {
         $data = Mahasiswa::all();
-        return view('mahasiswa-index', compact('data'));
+        return view('form-index', compact('data'));
     }
 }
